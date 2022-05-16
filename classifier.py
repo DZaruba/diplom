@@ -108,4 +108,3 @@ def class_acc_z():
 
 
 #print(class_acc_z())#Данный кусок кода показал, что данные передаются нормально
-print('test git')
