@@ -4,15 +4,7 @@ from pdb import pm
 import pymysql#Для подключения к серверу
 import datetime
 
-#server connection
-mydb = pymysql.connect(
-  host="localhost",
-  user="root",
-  database="diplom_test", #database
-  passwd="BMSTU_rk9_diplom"
-)
-
-
+'''
 def query_env ():
 
     mycursor = mydb.cursor() #cursor created
@@ -36,7 +28,17 @@ def query_env ():
 
     return pmh, alt, temp, time_line
 
+'''
+
 def query_acc_z ():
+  #server connection
+  mydb = pymysql.connect(
+  host="localhost",
+  user="root",
+  database="diplom_test", #database
+  passwd="BMSTU_rk9_diplom"
+  ) 
+
   mycursor = mydb.cursor() #cursor created
 
   select_query = "SELECT acc_z FROM diplom_test.input_data ORDER BY id DESC LIMIT 500"
@@ -53,9 +55,8 @@ def query_acc_z ():
   acc_z.reverse()#Делаем реверс массива (переворачиваем)
 
   mycursor.close()
+  mydb.close()
 
   return acc_z
 
 #print(query_acc_z())#Проверка показала, что данный кусок кода выводит все актуально и нормально
-
-  

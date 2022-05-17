@@ -47,53 +47,49 @@ def class_acc_z():
 
     #Пробегаемся по точкам максимума
     for row in arr_block_max:
-
         #Сравниваем с лежачим положением по оси мах
         if row > point_unconscious[0]:
             buf_un = abs(row - point_unconscious[0])
         else:
             buf_un = abs(point_unconscious[0] - row)
-
         #Сравниваем со активным положением по оси  max
         if row > point_active[0]:
             buf_ac = abs(row - point_active[0])
         else:
             buf_ac = abs(point_active[0] - row)
-
         #Сравниваем два расстояния к точкам классификации. У кого значение меньше, тому и присваиваем
         if buf_un < buf_ac:
-            arr_class_max.append('unconscious')
+            arr_class_max.append(['unconscious', buf_un])
         else:
-            arr_class_max.append('active')
+            arr_class_max.append(['active', buf_ac])
 
     #Пробегаемся по точкам минимума
     for row in arr_block_min:
-
         #Сравниваем с лежачим положением по оси min
         if row > point_unconscious[1]:
             buf_un = abs(row - point_unconscious[1])
         else:
             buf_un = abs(point_unconscious[1] - row)
-
         #Сравниваем со активным положением по оси min
         if row > point_active[1]:
             buf_ac = abs(row - point_active[1])
         else:
             buf_ac = abs(point_active[1] - row)
-
         #Сравниваем два расстояния к точкам классификации. У кого значение меньше, тому и присваиваем
         if buf_un < buf_ac:
-            arr_class_min.append('unconscious')
+            arr_class_min.append(['unconscious', buf_un])
         else:
-            arr_class_min.append('active')
+            arr_class_min.append(['active', buf_ac])
 
     #Начинаем цикл вывода итогового значения массива
     for i in range(len(arr_class_min)):
-        if arr_class_max[i] == arr_class_min[i]:
-            arr_class.append(arr_class_max[i])
+        if arr_class_max[i][0] == arr_class_min[i][0]:
+            arr_class.append(arr_class_max[i][0])
+        elif arr_class_max[i][1] < arr_class_min[i][1]:
+            arr_class.append(arr_class_max[i][0])
         else:
-            arr_class.append('und')
-
+            arr_class.append(arr_class_min[i][0])
+    
     #Итоговое решение по состоянию рабочего
     persent_act = (arr_class.count('active') / len(arr_class)) * 100 #Вероятность в процентах, что рабочий активничает
     persent_un = (arr_class.count('unconscious') / len(arr_class)) * 100 #Вероятность в процентах, что рабочий без сознания
@@ -105,6 +101,5 @@ def class_acc_z():
     else:
         result = f'Рабочий в порядке\n(Вероятность данного события {persent_act})'
         return result
-
 
 #print(class_acc_z())#Данный кусок кода показал, что данные передаются нормально
