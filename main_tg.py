@@ -10,7 +10,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 # Объект бота
-bot = Bot(token="1637085195:AAEhKwIRLz4UiDFrt6K8bf1xBs2HTdesyEU")
+bot = Bot(token="*****")
 # Диспетчер для бота
 dp = Dispatcher(bot)
 # Включаем логирование, чтобы не пропустить важные сообщения
